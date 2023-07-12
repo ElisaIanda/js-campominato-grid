@@ -1,69 +1,108 @@
-const squareChoseInput = document.getElementById("square-chose");
-const button = document.getElementById("button");
-const contenitoregrid = document.querySelector(".container-grid");
+document.getElementById("button").addEventListener("click", function () {
 
-button.addEventListener("click", myClick);
+    const div = document.querySelector(".container-grid")
+    const squareChose = document.getElementById("square-chose")
 
-//    codice da eseguire al click
-function myClick() {
+    for (let i = 1; i <= 100; i++) {
 
-    //    Leggo il valore della select
-    const squareChose = parseInt(squareChoseInput.value);
+        const squaresingolo = `<div class="${i} border border-1 square">${i}</div>`
+        div.innerHTML += squaresingolo
 
-    console.log("valore scelto", squareChose);
+    }
+    const list = document.querySelectorAll(".square")
 
-    //   genero la griglia in modo virtuale,
-    const listaGrid = createGrid(squareChose);
-
-    console.log(listaGrid);
-
-    printGrid(contenitoregrid, listaGrid);
-}
-
-//  genero un singolo quadrato
-
-function singoloSquare(squareContent, squareChose) {
-    const square = document.createElement("div");
-
-    const rowsquare = Math.sqrt(squareChose);
-
-    square.classList.add("grid-square");
-    square.style.flexBasis = `calc(100% / ${rowsquare})`;
-
-    square.addEventListener("click", function () {
-        square.classList.toggle("bg-warning");
-        square.innerHTML = squareContent;
-        console.log(squareContent);
-    });
-
-    return square;
-}
-
-//  crea tutta la griglia.
-
-function createGrid(numeroSquare) {
-    const grid = [];
-
-    for (let i = 0; i < numeroSquare; i++) {
-        // salvo in una variabile l'output della funzione 
-        const nuovoSquare = singoloSquare(i, numeroSquare);
-
-        grid.push(nuovoSquare);
+    for (let i = 0; i < list.length; i++) {
+        list[i].addEventListener("click", function () {
+            list[i].classList.toggle("bg-warning")
+            console.log(list[i].innerHTML)
+        })
     }
 
-    return grid;
-}
-
-//  aggiungo ad un elemento html
-
-function printGrid(container, listaSquare) {
-    //    reset del contenuto 
-    container.innerHTML = "";
-
-    for (let i = 0; i < listaSquare.length; i++) {
-        container.append(listaSquare[i]);
+    squareChose = parseInt(squareChose.value);
+    let square = 0;
+    let x = 0;
+    if (squareChose === 100) {
+        square = Math.sqrt(100);
+        x = 49;
+    } else if (squareChose === 81) {
+        square = Math.sqrt(81);
+        x = 81;
+    } else if (squareChose === 49) {
+        square = Math.sqrt(49);
+        x = 100;
     }
-}
+
+})
+
+
+
+// Riprovato esercizio da sola
+// const squareChoseInput = document.getElementById("square-chose");
+// const button = document.getElementById("button");
+// const contenitoregrid = document.querySelector(".container-grid");
+
+// button.addEventListener("click", myClick);
+
+// //    codice da eseguire al click
+// function myClick() {
+
+//     //    Leggo il valore della select
+//     const squareChose = parseInt(squareChoseInput.value);
+
+//     console.log("valore scelto", squareChose);
+
+//     //   genero la griglia in modo virtuale,
+//     const listaGrid = createGrid(squareChose);
+
+//     console.log(listaGrid);
+
+//     printGrid(contenitoregrid, listaGrid);
+// }
+
+// //  genero un singolo quadrato
+
+// function singoloSquare(squareContent, squareChose) {
+//     const square = document.createElement("div");
+
+//     const rowsquare = Math.sqrt(squareChose);
+
+//     square.classList.add("grid-square");
+//     square.style.flexBasis = `calc(100% / ${rowsquare})`;
+
+//     square.addEventListener("click", function () {
+//         square.classList.toggle("bg-warning");
+//         square.innerHTML = squareContent;
+//         console.log(squareContent);
+//     });
+
+//     return square;
+// }
+
+// //  crea tutta la griglia.
+
+// function createGrid(numeroSquare) {
+//     const grid = [];
+
+//     for (let i = 0; i < numeroSquare; i++) {
+//         // salvo in una variabile l'output della funzione
+//         const nuovoSquare = singoloSquare(i, numeroSquare);
+
+//         grid.push(nuovoSquare);
+//     }
+
+//     return grid;
+// }
+
+// //  aggiungo ad un elemento html
+
+// function printGrid(container, listaSquare) {
+//     //    reset del contenuto
+//     container.innerHTML = "";
+
+//     for (let i = 0; i < listaSquare.length; i++) {
+//         container.append(listaSquare[i]);
+//     }
+// }
 
 
 // Svolto in classe
@@ -98,7 +137,7 @@ function printGrid(container, listaSquare) {
 
 //     const squaresPerRow = Math.sqrt(squareCounts);
 
-//     square.classList.add("grid-square");    
+//     square.classList.add("grid-square");
 //     square.style.flexBasis = `calc(100% / ${squaresPerRow})`;
 
 //     square.addEventListener("click", function () {

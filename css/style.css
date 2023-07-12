@@ -1,4 +1,15 @@
+.square {
+    width: 80px;
+    height: 80px;
+    border: 1px solid black;
+}
+
 .container-grid {
+    width: 800px;
+    margin: auto;
+}
+
+/* .container-grid {
     display: flex;
     border: 1px solid black;
     flex-wrap: wrap;
@@ -11,4 +22,4 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
+} */
