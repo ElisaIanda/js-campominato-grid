@@ -1,35 +1,38 @@
 document.getElementById("button").addEventListener("click", function () {
 
-    const div = document.querySelector(".container-grid")
-    const squareChose = document.getElementById("square-chose")
+    const containerGrid = document.getElementById("container-grid");
+    const squareChoseInput = document.getElementById("square-chose");
 
-    for (let i = 1; i <= 100; i++) {
+    // select
+    const squareChose = parseInt(squareChoseInput.value);
 
-        const squaresingolo = `<div class="${i} border border-1 square">${i}</div>`
-        div.innerHTML += squaresingolo
+    if (squareChose === 49){
+        containerGrid.style.width = "630px";
+    } else if (squareChose === 81){
+        containerGrid.style.width = "810px";
+    } else if (squareChose === 100){
+        containerGrid.style.width = "900px";
+    }
+
+    containerGrid.innerHTML = "";
+
+    for (let i = 1; i <= squareChose; i++) {
+
+        const squareSingolo = `<div class="square">${i}</div>`
+        containerGrid.innerHTML += squareSingolo;
+        console.log(containerGrid);
 
     }
-    const list = document.querySelectorAll(".square")
 
-    for (let i = 0; i < list.length; i++) {
-        list[i].addEventListener("click", function () {
-            list[i].classList.toggle("bg-warning")
-            console.log(list[i].innerHTML)
+    const listaSquare = document.querySelectorAll(".square")
+
+    for (let i = 0; i < listaSquare.length; i++) {
+
+        listaSquare[i].addEventListener("click", function () {
+            
+            listaSquare[i].classList.toggle("bg-warning");
+            console.log(listaSquare[i].innerHTML);
         })
-    }
-
-    squareChose = parseInt(squareChose.value);
-    let square = 0;
-    let x = 0;
-    if (squareChose === 100) {
-        square = Math.sqrt(100);
-        x = 49;
-    } else if (squareChose === 81) {
-        square = Math.sqrt(81);
-        x = 81;
-    } else if (squareChose === 49) {
-        square = Math.sqrt(49);
-        x = 100;
     }
 
 })
