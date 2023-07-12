@@ -1,39 +1,34 @@
+const squareChoseInput = document.getElementById("square-chose");
+const button = document.getElementById("button");
+const contenitoregrid = document.querySelector(".container-grid");
 
-"use strict"
+button.addEventListener("click", myClick);
 
-const squareCountsSelect = document.querySelector("[name='squareCounts']");
-const btnStart = document.querySelector("#btn");
-const gridContainer = document.querySelector(".grid-container");
+//    codice da eseguire al click
+function myClick() {
 
-btnStart.addEventListener("click", onBtnClick);
+    //    Leggo il valore della select
+    const squareChose = parseInt(squareChoseInput.value);
 
+    console.log("valore scelto", squareChose);
 
-function onBtnClick() {
-    // codice da eseguire al click
+    //   genero la griglia in modo virtuale,
+    const listaGrid = createGrid(squareChose);
 
-    // Leggo il valore della select
-    const squareCounts = parseInt(squareCountsSelect.value);
+    console.log(listaGrid);
 
-    // console.log("valore scelto", squareCounts);
-
-    // devo generare la griglia. Questa viene generata in modo virtuale,
-    const gridList = createGrid(squareCounts);
-
-    // console.log(gridList);
-
-    // invoco la funzione che si occuperà di aggiungere al DOM i vari quadrati
-    printGrid(gridContainer, gridList);
+    printGrid(contenitoregrid, listaGrid);
 }
 
-// Genera un singolo quadrato e lo ritorna
+//  genero un singolo quadrato
 
-function createSingleSquare(squareContent, squareCounts) {
+function singoloSquare(squareContent, squareChose) {
     const square = document.createElement("div");
 
-    const squaresPerRow = Math.sqrt(squareCounts);
+    const rowsquare = Math.sqrt(squareChose);
 
-    square.classList.add("grid-square");    
-    square.style.flexBasis = `calc(100% / ${squaresPerRow})`;
+    square.classList.add("grid-square");
+    square.style.flexBasis = `calc(100% / ${rowsquare})`;
 
     square.addEventListener("click", function () {
         square.classList.toggle("bg-warning");
@@ -41,33 +36,104 @@ function createSingleSquare(squareContent, squareCounts) {
         console.log(squareContent);
     });
 
-    // Output
     return square;
 }
 
-// Dato un numero di celle, crea tutta la griglia.
+//  crea tutta la griglia.
 
-function createGrid(squaresNumber) {
+function createGrid(numeroSquare) {
     const grid = [];
 
-    for (let i = 0; i < squaresNumber; i++) {
-        // salvo in una variabile l'output della funzione createSingleSquare
-        const newSquare = createSingleSquare(i, squaresNumber);
+    for (let i = 0; i < numeroSquare; i++) {
+        // salvo in una variabile l'output della funzione 
+        const nuovoSquare = singoloSquare(i, numeroSquare);
 
-        grid.push(newSquare);
+        grid.push(nuovoSquare);
     }
 
-    // Output
     return grid;
 }
 
-// aggiungo ad un elemento html, la lista dei quadrati
+//  aggiungo ad un elemento html
 
-function printGrid(container, squaresList) {
-    // reset del contenuto del container per evitare che ci siano altri div creati precedentemente
+function printGrid(container, listaSquare) {
+    //    reset del contenuto 
     container.innerHTML = "";
 
-    for (let i = 0; i < squaresList.length; i++) {
-        container.append(squaresList[i]);
+    for (let i = 0; i < listaSquare.length; i++) {
+        container.append(listaSquare[i]);
     }
 }
+
+
+// Svolto in classe
+// const squareCountsSelect = document.querySelector("[name='squareCounts']");
+// const btnStart = document.querySelector("#btn");
+// const gridContainer = document.querySelector(".grid-container");
+
+// btnStart.addEventListener("click", onBtnClick);
+
+
+// function onBtnClick() {
+// //    codice da eseguire al click
+
+// //    Leggo il valore della select
+//     const squareCounts = parseInt(squareCountsSelect.value);
+
+//    console.log("valore scelto", squareCounts);
+
+// //    devo generare la griglia. Questa viene generata in modo virtuale,
+//     const gridList = createGrid(squareCounts);
+
+//    console.log(gridList);
+
+// //    invoco la funzione che si occuperà di aggiungere al DOM i vari quadrati
+//     printGrid(gridContainer, gridList);
+// }
+
+// //  Genera un singolo quadrato e lo ritorna
+
+// function createSingleSquare(squareContent, squareCounts) {
+//     const square = document.createElement("div");
+
+//     const squaresPerRow = Math.sqrt(squareCounts);
+
+//     square.classList.add("grid-square");    
+//     square.style.flexBasis = `calc(100% / ${squaresPerRow})`;
+
+//     square.addEventListener("click", function () {
+//         square.classList.toggle("bg-warning");
+//         square.innerHTML = squareContent;
+//         console.log(squareContent);
+//     });
+
+//    Output
+//     return square;
+// }
+
+//  Dato un numero di celle, crea tutta la griglia.
+
+// function createGrid(squaresNumber) {
+//     const grid = [];
+
+//     for (let i = 0; i < squaresNumber; i++) {
+//     //    salvo in una variabile l'output della funzione createSingleSquare
+//         const newSquare = createSingleSquare(i, squaresNumber);
+
+//         grid.push(newSquare);
+//     }
+
+//    Output
+//     return grid;
+// }
+
+// //  aggiungo ad un elemento html, la lista dei quadrati
+
+// function printGrid(container, squaresList) {
+// //    reset del contenuto del container per evitare che ci siano altri div creati precedentemente
+//     container.innerHTML = "";
+
+//     for (let i = 0; i < squaresList.length; i++) {
+//         container.append(squaresList[i]);
+//     }
+// }

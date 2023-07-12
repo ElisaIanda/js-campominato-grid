@@ -1,4 +1,4 @@
-.grid-container {
+.container-grid {
     display: flex;
     border: 1px solid black;
     flex-wrap: wrap;
